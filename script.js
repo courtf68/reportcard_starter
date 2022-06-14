@@ -131,12 +131,12 @@ const studentGradeEl = document.querySelector("#student-grade-level");
 const graduationYearEl = document.querySelector("#student-graduation-year");
 const imageUrlEl = document.querySelector("#student-image");
 const dropdownButtonElement = document.querySelector(".dropdown-button");
-const updateDropdownLabel =
-  document.querySelector(".dropdown-label"); /* wrong vari name */
+const DropdownLabelEl = document.querySelector(".dropdown-label");
 const fallSemesterElement = document.querySelector("#fall-semester");
 const springSemesterElement = document.querySelector("#spring-semester");
 const winterTermElement = document.querySelector("winter-term");
-const reportCardTableElement = document.querySelector("#report-card-table");
+const reportCardTableElement =
+  document.querySelector("#report-card-table"); /*or change name*/
 const GPAElement = document.querySelector("#gpa"); /*added*/
 /*pts?*/
 
@@ -153,7 +153,7 @@ function updateStudentName(studentName) {
   // document.getElementById("student-name").innerHTML =s studentName;
   // studentName.innerHTML = studentInformation.name
   // studentNameElement.innerHTML = studentInformation.name;
-  document.getElementById("student-name").innerHTML = "court";
+  studentNameElement.innerHTML = studentInformation.name;
 }
 
 /**
@@ -162,7 +162,7 @@ function updateStudentName(studentName) {
  * @param {String|Number} studentGradeLevel - the grade level of the student
  */
 function updateStudentGradeLevel(studentGradeLevel) {
-  studentGradeEl.innerHTML = studentGradeLevel;
+  studentGradeEl.innerHTML = studentInformation.grade;
 }
 
 /**
@@ -171,7 +171,7 @@ function updateStudentGradeLevel(studentGradeLevel) {
  * @param {String} studentAdvisor - the advisor of the student
  */
 function updateStudentAdvisor(studentAdvisor) {
-  studentAdvisorEl.innerHTML = studentAdvisor;
+  studentAdvisorEl.innerHTML = studentInformation.advisor;
 }
 
 /**
@@ -280,14 +280,17 @@ function addGpaRow(reportCardTableElement) {
  *
  */
 function updateReportCard(reportCardTableElement, currentSemester) {
+  forEach((currentValue) => {
+    addCourseRowToReportCard(reportCardTableElement, course, rowNum);
+  });
   // update the dropdown label
   updateDropdownLabel();
   // reset the report card table's inner html to an empty string
   if (reportCardTableElement) reportCardTableElement.innerHTML = ``;
 
   // add your code here
-  addReportCardHeaders;
-  addCourseRowToReportCard();
+  addReportCardHeaders(reportCardTableElement);
+  addCourseRowToReportCard(reportCardTableElement, course, rowNum);
 }
 
 /**
@@ -302,10 +305,13 @@ function updateReportCard(reportCardTableElement, currentSemester) {
  */
 function closeDropdown(dropdownElement) {
   // code goes here
+  dropdownElement.add();
 }
 
 function openDropdown(dropdownElement) {
+  dropdownElement.remove();
   // code goes here
+  addEventListener("onclick");
 }
 
 /**
@@ -371,9 +377,9 @@ function calculateSemesterGpa(reportCardTableElement) {
 }
 
 window.onload = function () {
-  //  populateStudentInfo(studentInformation)
-  updateStudentName(studentName);
-  //  updateReportCard()
+  populateStudentInfo(studentInformation);
+  // updateStudentName(studentName);
+  updateReportCard(reportCardTableElement, currentSemester);
 
   // execute your functions here to make sure they run as soon as the page loads
 };
